@@ -1,0 +1,260 @@
+
+SQL QUESTION 1
+How much is each member borrowing?
+
+SQL QUERY:
+
+SELECT m.member_id,m.first_name,m.last_name,COUNT(c.checkout_id) AS checkout_count
+FROM members AS m
+LEFT JOIN checkouts AS c
+ON m.member_id = c.member_id
+GROUP BY
+    m.member_id,
+    m.first_name,
+    m.last_name
+ORDER BY m.member_id;
+
+
+RESULT:
+ member_id first_name last_name  checkout_count
+      1001      Salma   Ibrahim               1
+      1002      Fares     Saleh               2
+      1003     Bassel    Hegazy               9
+      1004      Fares     Wahba               0
+      1005    Youssef     Halim               3
+      1006      Layla   Mansour               1
+      1007     Sherif     Fouad               3
+      1008       Ziad     Saleh              19
+      1009     Hassan     Saleh               1
+      1010       Nour     Nabil              18
+      1011      Menna     Halim               2
+      1012        Ali    Hegazy               0
+      1013       Ziad     Fouad               2
+      1014     Habiba     Nabil               1
+      1015      Hamza     Sabry               3
+      1016       Dina    Rashad               7
+      1017       Adam      Badr               2
+      1018      Ahmed    Shafik              17
+      1019    Mostafa     Wahba               3
+      1020       Rana     Fouad               7
+      1021      Fares     Fouad               0
+      1022    Youssef     Fouad               6
+      1023     Hassan    Rashad               1
+      1024    Youssef    Hegazy              17
+      1025       Hana     Nabil               0
+      1026       Nada     Saleh               3
+      1027    Mostafa     Fouad              18
+      1028     Hassan      Adel               3
+      1029       Rana     Kamel               0
+      1030       Reem     Osman              16
+      1031        Ali     Fahmy               1
+      1032       Nada      Zaki               6
+      1033     Marwan     Wahba               0
+      1034        Aya     Wahba              25
+      1035      Karim     Fahmy               1
+      1036       Lina      Zaki               1
+      1037      Retaj     Kamel               2
+      1038        Mai   Mansour               0
+      1039       Nada      Riad               2
+      1040       Dina      Adel               2
+      1041       Nada    Rashad               2
+      1042      Fares     Fahmy               0
+      1043       Rana     Halim               0
+      1044     Sherif     Saleh              21
+      1045     Sherif     Fahmy               0
+      1046       Amir     Fouad               1
+      1047       Sara    Rashad              16
+      1048    Youssef     Kamel               0
+      1049      Ahmed     Gamal               1
+      1050      Fares      Adel              11
+      1051      Karim    Rashad               0
+      1052      Retaj      Adel               1
+      1053       Adam    Shafik               5
+      1054      Retaj     Fahmy               6
+      1055    Mostafa     Kamel               2
+      1056     Farida     Osman               0
+      1057      Ahmed     Fahmy              10
+      1058       Lina   Mansour               3
+      1059       Lina     Halim               7
+      1060      Layla     Wahba               2
+      1061       Ziad     Fahmy               8
+      1062      Tarek      Adel               7
+      1063      Layla     Fouad               0
+      1064      Fares     Sabry               0
+      1065       Adam     Fahmy              17
+      1066       Amir     Wahba               0
+      1067        Aya   Ibrahim               3
+      1068      Layla    Hegazy               6
+      1069     Bassel      Adel               0
+      1070      Ahmed      Zaki               3
+      1071       Jana    Hegazy               2
+      1072       Seif      Zaki              14
+      1073     Yassin     Kamel               2
+      1074    Mostafa     Saleh               2
+      1075      Malak     Fahmy               9
+      1076       Dina     Wahba               7
+      1077       Lina    Rashad               6
+      1078     Habiba     Osman               0
+      1079       Rana     Osman              10
+      1080     Bassel     Wahba               2
+
+------------------
+
+SQL QUESTION 2
+Which books match a chosen author pattern?
+
+Chosen pattern: %a%
+
+SQL QUERY:
+
+SELECT
+book_id,
+title,
+author
+FROM books
+WHERE author LIKE '%a%';
+
+
+RESULT:
+ book_id                   title         author
+     501         The Silver Kite  Amina Darwish
+     502          Desert Compass  Amina Darwish
+     503       The Lantern Maker   Adel Roushdy
+     504     Rooftop Astronomers   Adel Roushdy
+     505     Letters to the Nile      Aya Hafez
+     506     The Paper Boat Club      Aya Hafez
+     507   Fossils and Fireflies    Dalia Serry
+     508   The Quiet Observatory    Dalia Serry
+     509     Marbles and Mirrors    Diaa Sultan
+     510   The Missing Metronome    Diaa Sultan
+     511    Winter in Alexandria   Farida Anwar
+     512  The Cartographer's Cat   Farida Anwar
+     513  Circuits for Beginners   Galal Mounir
+     514   The Robot in Row Nine   Galal Mounir
+     515      Songs of the Oasis     Hoda Bakry
+     516 The Beekeeper's Almanac     Hoda Bakry
+     517 Shadows on the Corniche    Hani Nagati
+     518    The Ninth Lighthouse    Hani Nagati
+     519        Kites Over Cairo Jasmine Wahdan
+     520    The Copper Telescope Jasmine Wahdan
+     521   A Garden of Equations     Karim Elwy
+     522     The Puzzle Merchant     Karim Elwy
+     523   Footsteps in the Dust   Laila Shokry
+     524   The Weaver's Daughter   Laila Shokry
+     525    Storms and Sailboats  Mahmoud Rafei
+     526   The Clockwork Orchard  Mahmoud Rafei
+     527    Notes from the Delta Mona Kholoussy
+     528       The Glass Beehive Mona Kholoussy
+     529  Riddles of the Red Sea   Sara Tantawy
+     530       The Sandstone Key   Sara Tantawy
+     531   Voices in the Library    Samir Zohdy
+     532       The Last Bookmark    Samir Zohdy
+
+--------------------------
+
+SQL QUESTION 3
+What are the five most popular books?
+
+SQL QUERY:
+
+SELECT
+b.book_id,
+b.title,
+COUNT(c.checkout_id) AS checkout_count
+FROM books AS b
+JOIN checkouts AS c
+ON b.book_id = c.book_id
+GROUP BY
+b.book_id,
+b.title
+ORDER BY checkout_count DESC
+LIMIT 5;
+
+
+RESULT:
+ book_id                  title  checkout_count
+     501        The Silver Kite              57
+     507  Fossils and Fireflies              55
+     513 Circuits for Beginners              46
+     519       Kites Over Cairo              38
+     525   Storms and Sailboats              25
+
+---------------------
+
+SQL QUESTION 4
+Who are the ten most active readers?
+
+SQL QUERY:
+
+SELECT
+m.member_id,
+m.first_name,
+m.last_name,
+COUNT(c.checkout_id) AS book_count
+FROM members AS m
+JOIN checkouts AS c
+ON m.member_id = c.member_id
+GROUP BY
+m.member_id,
+m.first_name,
+m.last_name
+ORDER BY book_count DESC
+LIMIT 10;
+
+
+RESULT:
+ member_id first_name last_name  book_count
+      1034        Aya     Wahba          25
+      1044     Sherif     Saleh          21
+      1008       Ziad     Saleh          19
+      1010       Nour     Nabil          18
+      1027    Mostafa     Fouad          18
+      1018      Ahmed    Shafik          17
+      1024    Youssef    Hegazy          17
+      1065       Adam     Fahmy          17
+      1030       Reem     Osman          16
+      1047       Sara    Rashad          16
+
+-----------------
+
+SQL QUESTION 5
+Neighborhood activity further back in time
+
+Chosen neighborhood: Maadi
+
+SQL QUERY:
+
+SELECT
+c.checkout_id,
+c.member_id,
+c.book_id,
+c.checkout_date,
+c.return_date
+FROM checkouts AS c
+JOIN members AS m
+ON c.member_id = m.member_id
+WHERE m.neighborhood = 'Maadi'
+ORDER BY c.checkout_date DESC
+LIMIT 10 OFFSET 10;
+
+
+RESULT:
+ checkout_id  member_id  book_id checkout_date return_date
+        9103       1003      513    2025-09-04  2025-09-25
+        9081       1017      502    2025-08-25  2025-09-17
+        9001       1008      501    2025-08-23  2025-08-28
+        9050       1003      521    2025-08-21         NaN
+        9085       1018      525    2025-08-19  2025-09-18
+        9055       1015      525    2025-08-08  2025-08-27
+        9023       1018      503    2025-08-04  2025-08-27
+        9004       1013      519    2025-07-27  2025-08-16
+        9051       1003      513    2025-07-22  2025-08-18
+        9010       1009      513    2025-07-22  2025-08-16
+
+---------------------
+
+WEB PAGE VS API REFLECTION
+
+The Reading Kickoff data came from an HTML web page, which is designed mainly for people to read in a browser. An API, on the other hand, provides data directly to programs in a structured and predictable format.
+
+For this project, the difference mattered because the Reading Kickoff data had to be extracted from an HTML table before it could be combined with the database data. If the same information had been provided through an API, it would likely have been easier to access and process automatically.
